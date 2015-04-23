@@ -56,7 +56,7 @@ La ip va a ser distinta en cada caso, pueden ver la ip asignada a su instancia e
 Crear keys ssh en su instancia recien creada
 * chmod 600 workshop.pem
 * ssh -i workshop.pem ubuntu@54.227.151.222  aca es donde la ip es variable
-* aceptar Key
+* aceptar permiso de conectar
 * Una vez conectados ejecutar el siguiente commando ssh-keygen -t rsa -C su_email_de_github@example.com
 * Darle a todo "Enter" no hay que cambiar nada.
 * cat ~/.ssh/id_rsa.pub el resultado copiarlo entero.
@@ -75,9 +75,14 @@ Instalar como sudo los siguiente paquetes que son dependencias para correr nuest
 
 7)
 Crear nuestra App.
+Setear las siguientes opciones:
+
+*
+*
+*
 
 
 8)
-Hacer nuestro primer deploy marcado la opcion que run migrate on.
+Hacer nuestro primer deploy marcando la opcion que run migrate on SIEMPRE!! (Solo aplica por que estamos usando SQLite).
 
 
