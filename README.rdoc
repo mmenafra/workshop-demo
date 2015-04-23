@@ -12,30 +12,32 @@ Van a necesitar este repo ya que vamos a utilizar esta simple app para la demo.
 
 = PASOS
 
-1)
+1) 
+Antes de crear nuestra instancia vamos a precisar crear una key para poder despues ingresar via ssh a nuestra instancia
+Para crearla vamos a ir al menu de Ec2 "https://console.aws.amazon.com/ec2/v2/home" y en el menu de la izquiera seleccionar "Key Pairs".
+Creamos una key y le ponemos el nombre de "workshop". Apenas se crea nos descarga una copia a nuestra computadora. No la borren la vamos a precisar.
+
+
+2)
 Crear un nuevo stack llamado "Workshop" desde OpsWork.
 Setear las siguientes opciones:
 * Region = US East (N.Virginia)
 * Default Availability Zone = us-east-1a
 * Default operating system = Ubuntu 14.04 LTS 
 * Default root device type = EBS Backed
+* Default SSH key = Key recien creada
 
 Listo las demas opciones quedan en su default y creamos el stack
 Una vez creado lo editamo y agregamos bajo "Custom JSON" el siguente snippet de json "http://pastie.org/private/khuj3fxfx8v7ut1xpl0ta".
 Y Salvamos los cambios
 
-2)
+3)
 Ahora vamos a crear el Layer.
 Setear las siguientes opciones:
 * Layer type = Rails App Server
 * Rails stack = Nginx and Unicorn
 
 Listo las demas opciones quedan en su default y creamos el Layer
-
-3) 
-Antes de crear nuestra instancia vamos a precisar crear una key para poder despues ingresar via ssh a nuestra instancia
-Para crearla vamos a ir al menu de Ec2 "https://console.aws.amazon.com/ec2/v2/home" y en el menu de la izquiera seleccionar "Key Pairs".
-Creamos una key y le ponemos el nombre de "workshop". Apenas se crea nos descarga una copia a nuestra computadora. No la borren la vamos a precisar.
 
 
 4)
