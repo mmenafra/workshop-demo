@@ -77,9 +77,12 @@ Instalar como sudo los siguiente paquetes que son dependencias para correr nuest
 Crear nuestra App.
 Setear las siguientes opciones:
 
-*
-*
-*
+* Name : workshop
+* Repository URL : Url a su repo en github
+* Repository SSH key: lo que copiaron al hacer cat ~/.ssh/id_rsa 
+* Branch/Revision :  master
+
+Y salvan la app.
 
 
 8)
