@@ -1,28 +1,83 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aca van a estar todo los pasos y pequenos trucos que se requiere para efectuar la demo de hoy y tener subida nuestra app RoR en OpsWork
 
-Things you may want to cover:
+Primero que nada este logeados a su cuenta de AWS y tambien a su cuenta de github online que van a necesitarlas para seguir la demo.
 
-* Ruby version
+= ANTES DE EMPEZAR
 
-* System dependencies
+Entar a mi cuenta de github y al siguiente repo "https://github.com/mmenafra/workshop-demo" y forkear este repo bajo su cuenta.
+Asi pueden hacerle cambios cada uno individualmente.
+Van a necesitar este repo ya que vamos a utilizar esta simple app para la demo.
 
-* Configuration
+= PASOS
 
-* Database creation
+1)
+Crear un nuevo stack llamado "Workshop" desde OpsWork.
+Setear las siguientes opciones:
+* Region = US East (N.Virginia)
+* Default Availability Zone = us-east-1a
+* Default operating system = Ubuntu 14.04 LTS 
+* Default root device type = EBS Backed
 
-* Database initialization
+Listo las demas opciones quedan en su default y creamos el stack
+Una vez creado lo editamo y agregamos bajo "Custom JSON" el siguente snippet de json "http://pastie.org/private/khuj3fxfx8v7ut1xpl0ta".
+Y Salvamos los cambios
 
-* How to run the test suite
+2)
+Ahora vamos a crear el Layer.
+Setear las siguientes opciones:
+* Layer type = Rails App Server
+* Rails stack = Nginx and Unicorn
 
-* Services (job queues, cache servers, search engines, etc.)
+Listo las demas opciones quedan en su default y creamos el Layer
 
-* Deployment instructions
+3) 
+Antes de crear nuestra instancia vamos a precisar crear una key para poder despues ingresar via ssh a nuestra instancia
+Para crearla vamos a ir al menu de Ec2 "https://console.aws.amazon.com/ec2/v2/home" y en el menu de la izquiera seleccionar "Key Pairs".
+Creamos una key y le ponemos el nombre de "workshop". Apenas se crea nos descarga una copia a nuestra computadora. No la borren la vamos a precisar.
 
-* ...
+
+4)
+Ahora hay que crear una instancia Ec2 donde va a correr nuestra app.
+Vamos a la seccion de instancias de Opswork y hacemos clic en "agregar instancia".
+Setear las siguientes opciones:
+
+* Size = t1.micro
+* SSH key = seleccionamos "workshop"
+
+El resto queda igual y creamos la instancia. Una vez creada hacemos clic en "Start" para que inicie el proceso de levantar la instancia y configurarla segun nuestras necesidades.
+
+5)
+Una vez que nuestra instancia esta "online"
+Vamos a generar nuestras keys para github dentro de nuestra instancia asi que vamos a conectarnos via SSH.
+La ip va a ser distinta en cada caso, pueden ver la ip asignada a su instancia en la vista "Instances" de Opswork.
+
+Crear keys ssh en su instancia recien creada
+* chmod 600 workshop.pem
+* ssh -i workshop.pem ubuntu@54.227.151.222  aca es donde la ip es variable
+* aceptar Key
+* Una vez conectados ejecutar el siguiente commando ssh-keygen -t rsa -C su_email_de_github@example.com
+* Darle a todo "Enter" no hay que cambiar nada.
+* cat ~/.ssh/id_rsa.pub el resultado copiarlo entero.
+* usar lo que copiaron anteriorment en Github para crear una key nueva
+* ejecutar ssh -T git@github.com  para ver que la autenticacion con su github haya sido exsitosa.
+* cat ~/.ssh/id_rsa  copiar el resultado en Opswork junto con el branch y el https de repo al crear la "App"
+
+6)
+Instalar como sudo los siguiente paquetes que son dependencias para correr nuestra app en rails.
+
+* sudo apt-get update
+* sudo apt-get upgrade
+* sudo apt-get install libsqlite3-dev
+* sudo apt-get install nodejs
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+7)
+Crear nuestra App.
+
+
+8)
+Hacer nuestro primer deploy marcado la opcion que run migrate on.
+
+
